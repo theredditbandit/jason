@@ -36,6 +36,10 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.LBRACE, l.ch)
 	case '}':
 		tok = newToken(token.RBRACE, l.ch)
+	case '[':
+		tok = newToken(token.LBRACKET, l.ch)
+	case ']':
+		tok = newToken(token.RBRACKET, l.ch)
 	case '"':
 		l.readChar() // advance position to first character after the first DQUOTE
 		tok.Literal = l.readString()
@@ -47,12 +51,25 @@ func (l *Lexer) NextToken() token.Token {
 	case ',':
 		tok = newToken(token.COMMA, l.ch)
 	default:
-		tok.Literal = l.readInt()
-		tok.Type = token.INT
-		return tok
+		if string(l.ch) == `n` { // null char
+			tok.Literal = l.readNull()
+			tok.Type = token.NULL
+			return tok
+		} else {
+			tok.Literal = l.readInt()
+			tok.Type = token.INT
+			return tok
+		}
 	}
 	l.readChar()
 	return tok
+}
+
+func (l *Lexer) readNull() string {
+	for i := 0; i < 4; i++ {
+		l.readChar() // length of null
+	}
+	return "null"
 }
 
 func (l *Lexer) readInt() string {

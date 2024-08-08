@@ -12,7 +12,11 @@ func TestLexer(t *testing.T) {
     "abcd":12345,
 	"key":"Value",
 	"key2":9,
-	"Space separated key":"Space separated alphanumeric value 3"
+	"Space separated key":"Space separated alphanumeric value 3",
+	"arr":[1,2,"abc"],
+	"nested": {"a":4},
+	"nullval":null,
+	"final":null
     }
     `
 	tests := []struct {
@@ -35,6 +39,32 @@ func TestLexer(t *testing.T) {
 		{token.STRING, "Space separated key"},
 		{token.COLON, ":"},
 		{token.STRING, "Space separated alphanumeric value 3"},
+		{token.COMMA, ","},
+		{token.STRING, "arr"},
+		{token.COLON, ":"},
+		{token.LBRACKET, "["},
+		{token.INT, "1"},
+		{token.COMMA, ","},
+		{token.INT, "2"},
+		{token.COMMA, ","},
+		{token.STRING, "abc"},
+		{token.RBRACKET, "]"},
+		{token.COMMA, ","},
+		{token.STRING, "nested"},
+		{token.COLON, ":"},
+		{token.LBRACE, "{"},
+		{token.STRING, "a"},
+		{token.COLON, ":"},
+		{token.INT, "4"},
+		{token.RBRACE, "}"},
+		{token.COMMA, ","},
+		{token.STRING,"nullval"},
+		{token.COLON,":"},
+		{token.NULL,"null"},
+		{token.COMMA, ","},
+		{token.STRING,"final"},
+		{token.COLON,":"},
+		{token.NULL,"null"},
 		{token.RBRACE, "}"},
 	}
 	l := New(input)

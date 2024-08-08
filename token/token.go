@@ -28,4 +28,5 @@ const (
 	SQUOTE    = "'"
 	LBRACKET  = "["
 	RBRACKET  = "]"
+	NULL      = "NULL"
 )
