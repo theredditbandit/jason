@@ -9,7 +9,7 @@ import (
 func TestLexer(t *testing.T) {
 	input := `
     {
-    "a":1,
+    "abcd":12345,
     }
     `
 	tests := []struct {
@@ -17,9 +17,9 @@ func TestLexer(t *testing.T) {
 		expectedLiteral string
 	}{
 		{token.LBRACE, "{"},
-		{token.STRING, "a"},
+		{token.STRING, "abcd"},
 		{token.COLON, ":"},
-		{token.INT, "1"},
+		{token.INT, "12345"},
 		{token.COMMA, ","},
 		{token.RBRACE, "}"},
 	}

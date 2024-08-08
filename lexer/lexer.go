@@ -49,7 +49,6 @@ func (l *Lexer) NextToken() token.Token {
 	default:
 		tok.Literal = l.readInt()
 		tok.Type = token.INT
-		l.readChar()
 		return tok
 	}
 	l.readChar()
@@ -61,7 +60,7 @@ func (l *Lexer) readInt() string {
 	for isDigit(l.ch) {
 		l.readChar()
 	}
-	return l.input[position:l.readPosition]
+	return l.input[position:l.position]
 }
 
 func (l *Lexer) peekChar() byte {
@@ -81,7 +80,7 @@ func (l *Lexer) readString() string {
 }
 
 func isDigit(ch byte) bool {
-	return '9' <= ch && ch <= '9'
+	return '0' <= ch && ch <= '9'
 }
 
 func isLetter(ch byte) bool {
