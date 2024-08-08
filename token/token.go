@@ -11,12 +11,21 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	IDENT = "IDENT"
-	INT   = "INT"
-	STR   = "STR"
+	VALUE = "VALUE"
+	KEY   = "KEY"
 
-	LBRACE = "{"
-	RBRACE = "}"
-	COMMA  = ","
-	COLON  = ":"
+	IDENT  = "IDENT"
+	INT    = "INT"
+	STRING = "STRING"
+	ARRAY  = "ARRAY"
+
+	LBRACE    = "{"
+	RBRACE    = "}"
+	COMMA     = ","
+	COLON     = ":"
+	SEMICOLON = ";"
+	DQUOTE    = "\""
+	SQUOTE    = "'"
+	LBRACKET  = "["
+	RBRACKET  = "]"
 )
