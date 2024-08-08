@@ -65,7 +65,7 @@ func (l *Lexer) readInt() string {
 
 func (l *Lexer) readString() string {
 	position := l.position
-	for isLetter(l.ch) {
+	for l.ch != '"' {
 		l.readChar()
 	}
 	return l.input[position:l.position]
@@ -73,11 +73,6 @@ func (l *Lexer) readString() string {
 
 func isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9'
-}
-
-func isLetter(ch byte) bool {
-	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z'
-
 }
 
 func (l *Lexer) skipWhitespace() {

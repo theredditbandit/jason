@@ -10,7 +10,9 @@ func TestLexer(t *testing.T) {
 	input := `
     {
     "abcd":12345,
-	"key":"Value"
+	"key":"Value",
+	"key2":9,
+	"Space separated key":"Space separated alphanumeric value 3"
     }
     `
 	tests := []struct {
@@ -25,6 +27,14 @@ func TestLexer(t *testing.T) {
 		{token.STRING, "key"},
 		{token.COLON, ":"},
 		{token.STRING, "Value"},
+		{token.COMMA, ","},
+		{token.STRING, "key2"},
+		{token.COLON, ":"},
+		{token.INT, "9"},
+		{token.COMMA, ","},
+		{token.STRING, "Space separated key"},
+		{token.COLON, ":"},
+		{token.STRING, "Space separated alphanumeric value 3"},
 		{token.RBRACE, "}"},
 	}
 	l := New(input)
