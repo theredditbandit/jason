@@ -63,14 +63,6 @@ func (l *Lexer) readInt() string {
 	return l.input[position:l.position]
 }
 
-func (l *Lexer) peekChar() byte {
-	if l.position >= len(l.input) {
-		return 0
-	} else {
-		return l.input[l.readPosition]
-	}
-}
-
 func (l *Lexer) readString() string {
 	position := l.position
 	for isLetter(l.ch) {
